@@ -5,7 +5,7 @@ pnpm i
 pnpm dev
 ```
 
-If you using `adapter-node` consider to set `ORIGIN` [environment](https://kit.svelte.dev/docs/adapter-node#environment-variables-origin-protocol-header-and-host-header) variable value to prevent form submit forbidden error.
+Consider setting the ORIGIN [environment](https://kit.svelte.dev/docs/adapter-node#environment-variables-origin-protocol-header-and-host-header) variable if you're using `adapter-node` to avoid the "Form submission forbidden" error. 
 
 ```bash
 pnpm build
