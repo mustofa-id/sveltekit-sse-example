@@ -9,13 +9,22 @@
 	/** @type {import('./$types').ActionData} */
 	export let form;
 
+	/** @type {string}*/
+	let user;
+
+	$: if (form?.join && !user) set_user();
+
+	function set_user() {
+		user = form?.user;
+	}
+
 	function subscribe() {
 		const sse = new EventSource('/simple-chat');
 		sse.onmessage = () => invalidate('chats');
 		return () => sse.close();
 	}
 
-	onMount(() => subscribe());
+	onMount(subscribe);
 </script>
 
 <main>
@@ -46,18 +55,26 @@
 			</article>
 		</section>
 
-		{#if form?.user}
+		{#if user}
 			<form
 				action="?/send"
 				method="post"
+				on:reset={() => console.log('reset')}
 				use:enhance={() =>
-					/* prevent `form` prop being updated  */
-					({ form }) => {
-						// form.reset();
-						// TODO: resetting form here cause request hang, need to be addressed.
+					/* prevent `form` prop being auto updated  */
+					({ form, result, update }) => {
+						if (result.type === 'success') {
+							// clear message input
+							const message_input = form.elements.namedItem('message');
+							if (message_input instanceof HTMLInputElement) {
+								message_input.value = '';
+								return;
+							}
+						}
+						update();
 					}}
 			>
-				<input type="text" name="name" value={form?.user} hidden />
+				<input type="text" name="name" value={user} hidden />
 				<!-- svelte-ignore a11y-autofocus -->
 				<input type="text" name="message" placeholder="Type your message" autofocus required />
 				<button>Send</button>
@@ -67,6 +84,11 @@
 				<input type="text" name="name" placeholder="Your name" required />
 				<button>Join</button>
 			</form>
+		{/if}
+
+		{#if form?.message}
+			<br />
+			<em>{form?.message}</em>
 		{/if}
 	</fieldset>
 </main>

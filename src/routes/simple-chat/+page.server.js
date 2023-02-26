@@ -16,7 +16,7 @@ export const actions = {
 		if (!name) return fail(400, { message: 'Please fill your name!' });
 
 		send_chat({ user: name, message: '', type: 'join' });
-		return { user: name, success: true };
+		return { user: name, join: true };
 	},
 
 	async send({ request }) {
@@ -29,6 +29,6 @@ export const actions = {
 		}
 
 		send_chat({ user: name, message, type: 'message' });
-		return { user: name, success: true };
+		return { user: name, sent: true };
 	}
 };
