@@ -6,16 +6,11 @@
 
 	function subscribe() {
 		const sse = new EventSource('/current-time');
-		sse.onmessage = (e) => {
-			server_time = e.data;
-		};
+		sse.onmessage = (e) => (server_time = e.data);
 		return () => sse.close();
 	}
 
-	onMount(() => {
-		const unsub = subscribe();
-		return unsub;
-	});
+	onMount(subscribe);
 </script>
 
 <pre>{server_time}</pre>

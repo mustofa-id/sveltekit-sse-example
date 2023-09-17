@@ -57,16 +57,14 @@
 			<form
 				action="?/send"
 				method="post"
-				on:reset={() => console.log('reset')}
 				use:enhance={() =>
-					/* prevent `form` prop being auto updated  */
 					({ form, result, update }) => {
 						if (result.type === 'success') {
-							// clear message input
+							// clear only message input
 							const message_input = form.elements.namedItem('message');
 							if (message_input instanceof HTMLInputElement) {
 								message_input.value = '';
-								return;
+								return; // prevent the `form` prop from being updated
 							}
 						}
 						update();
