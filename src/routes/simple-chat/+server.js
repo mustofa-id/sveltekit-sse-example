@@ -1,7 +1,6 @@
 import { ChatEvent, chat_events } from './data';
 
-/** @type {import('./$types').RequestHandler} */
-export const GET = () => {
+export function GET() {
 	/** @type {ChatEvent} */
 	const event = new ChatEvent();
 	chat_events.push(event);
@@ -25,4 +24,4 @@ export const GET = () => {
 			Connection: 'keep-alive'
 		}
 	});
-};
+}

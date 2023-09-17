@@ -3,13 +3,11 @@
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 
-	/** @type {import('./$types').PageData} */
 	export let data;
 
-	/** @type {import('./$types').ActionData} */
 	export let form;
 
-	/** @type {string}*/
+	/** @type {string=} */
 	let user;
 
 	$: if (form?.join && !user) set_user();

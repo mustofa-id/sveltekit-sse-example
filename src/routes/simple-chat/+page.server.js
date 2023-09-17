@@ -1,13 +1,11 @@
 import { fail } from '@sveltejs/kit';
 import { chats, send_chat } from './data';
 
-/** @type {import('./$types').PageServerLoad} */
-export const load = ({ depends }) => {
+export function load({ depends }) {
 	depends('chats');
 	return { chats };
-};
+}
 
-/** @type {import('./$types').Actions} */
 export const actions = {
 	async join({ request }) {
 		const form = await request.formData();

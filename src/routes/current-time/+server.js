@@ -1,5 +1,4 @@
-/** @type {import('./$types').RequestHandler} */
-export const GET = () => {
+export function GET() {
 	/** @type {ReturnType<typeof setInterval> | undefined} */
 	let timer;
 
@@ -21,4 +20,4 @@ export const GET = () => {
 			'Content-Type': 'text/event-stream'
 		}
 	});
-};
+}
