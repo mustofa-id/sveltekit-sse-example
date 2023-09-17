@@ -1,4 +1,4 @@
-import { ChatEvent, chat_events } from './data';
+import { ChatEvent, chat_events } from './data.server';
 
 export function GET() {
 	/** @type {ChatEvent} */

@@ -1,5 +1,5 @@
 import { fail } from '@sveltejs/kit';
-import { chats, send_chat } from './data';
+import { chats, send_chat } from './data.server';
 
 export function load({ depends }) {
 	depends('chats');
